@@ -30,6 +30,7 @@
         mat-raised-button
         color="primary"
         style="margin-right: 8px;"
+        [disabled]="receiving"
       >
         Start receiving
       </button>
@@ -38,6 +39,7 @@
         mat-raised-button
         color="accent"
         style="margin-right: 8px;"
+        [disabled]="!receiving"
       >
         Stop receiving
       </button>

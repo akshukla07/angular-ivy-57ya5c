@@ -17,8 +17,9 @@ import {
 })
 export class AppComponent implements AfterViewInit {
   counter: number = 0;
-  speed: number = 1000;
+  speed: number = 300;
   rate: number = 1;
+  receiving: boolean = false;
 
   @ViewChild('btnStart') btnStart;
   @ViewChild('btnStop') btnStop;
@@ -41,7 +42,9 @@ export class AppComponent implements AfterViewInit {
       this.btnReset._elementRef.nativeElement,
       'click'
     ).pipe(
-      tap(() => this.pauseCounter$.next(0)),
+      tap(() => {
+        this.pauseCounter$.next(0);
+      }),
       mapTo(0)
     );
 
@@ -56,9 +59,19 @@ export class AppComponent implements AfterViewInit {
     this.start$
       .pipe(mergeWith(this.reset$, this.pause$))
       .subscribe((x) => (this.counter = x));
+
+    this.pauseCounter$.subscribe((num) => {
+      if (num == 0 && this.receiving) {
+        this.receiving = false;
+        setTimeout(() => {
+          this.btnStart._elementRef.nativeElement.click();
+        }, 300);
+      } else this.receiving = false;
+    });
   }
 
   incrementCounter() {
+    this.receiving = true;
     return timer(0, this.speed).pipe(
       scan((acc, curr) => acc + this.rate, this.counter),
       takeUntil(this.pauseCounter$)
