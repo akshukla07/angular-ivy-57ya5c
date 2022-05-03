@@ -1,11 +1,46 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
-<p>
-Icon with a badge
-<mat-icon matBadge="15" matBadgeColor="warn">home</mat-icon>
-  <span class="cdk-visually-hidden">
-    Example with a home icon with overlaid badge showing the number 15
-  </span>
-</p>
+<div
+  fxlayout="row"
+  fxlayoutalign="center center"
+  style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center; padding: 24px; min-height: 700px; height: 100vh;"
+>
+  <div>
+    <div
+      fxlayout="row"
+      fxlayoutgap="8px"
+      fxlayoutalign="center center"
+      style="flex-direction: row; box-sizing: border-box; display: flex; place-content: center; align-items: center; margin-bottom: 24px;"
+    >
+      <button mat-icon-button #btnReset>
+        <mat-icon
+          [matBadgeHidden]="counter == 0"
+          [matBadge]="counter"
+          matBadgeColor="warn"
+          >mail_outline</mat-icon
+        >
+      </button>
+    </div>
+    <div
+      fxlayout=" row"
+      fxlayoutgap="8px"
+      fxlayoutalign="center center"
+      style="flex-flow: row wrap; box-sizing: border-box; display: flex; place-content: center; align-items: center; margin-bottom: 8px;"
+    >
+      <button
+        #btnStart
+        mat-raised-button
+        color="primary"
+        style="margin-right: 8px;"
+      >
+        Start receiving
+      </button>
+      <button
+        #btnStop
+        mat-raised-button
+        color="accent"
+        style="margin-right: 8px;"
+      >
+        Stop receiving
+      </button>
+    </div>
+  </div>
+</div>
